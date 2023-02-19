@@ -9,9 +9,12 @@ export const SidebarContainer = styled.div`
   grid-template-rows: 50px 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  transition: 0.2s;
 
   #ShowSidebar {
     overflow-y: auto;
+    overflow-x: hidden;
+
     &::-webkit-scrollbar {
       width: 5px;
     }
