@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: #1e1e1e;
 
   #ShowSidebar {
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 230px 1fr;
   }
 `;
 

@@ -9,7 +9,7 @@ export default ({
 }: Renderer.Components.Sidebar.Props) => {
   return (
     <SidebarContainer
-      style={state.showSidebar ? { width: '250px' } : { width: '50px' }}
+      style={state.showSidebar ? { width: '230px' } : { width: '50px' }}
     >
       <SidebarHandle onClick={() => dispatch(showSidebar(!state.showSidebar))}>
         <BsArrowLeftRight />

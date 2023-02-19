@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// Sidebar
 export const SidebarContainer = styled.div`
   background-color: #1d1d1d;
   box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.5);
@@ -122,7 +123,6 @@ export const SidebarContainer = styled.div`
     }
   }
 `;
-
 export const SidebarHandle = styled.div`
   display: flex;
   align-items: center;
@@ -138,5 +138,67 @@ export const SidebarHandle = styled.div`
   &:hover {
     color: rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+// Api Manager
+export const ApiManagerContainer = styled.div`
+  margin: 5px;
+  transition: 0.2s;
+`;
+
+export const ApiManagerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  width: 95%;
+  margin: 0 auto;
+  transition: 0.2s;
+`;
+export const ApiManagerHeaderTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  color: white;
+  transition: 0.2s;
+`;
+export const ApiManagerHeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+`;
+export const ApiManagerHeaderAction = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: rgb(255, 0, 122);
+  background-color: rgba(175, 0, 83, 0.1);
+  border: 1px solid rgba(175, 0, 83, 0.3);
+
+  &:hover {
+    color: rgba(225, 0, 122, 0.8);
+  }
+
+  &active {
+    color: rgba(225, 0, 122, 0.5);
   }
 `;

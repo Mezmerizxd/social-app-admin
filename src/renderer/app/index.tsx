@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { Container, Waiting, Application } from './styles';
 import { renderer } from '../reducers/reducer';
-import { SidebarActions } from './config';
+import { Contexts, SidebarActions } from './config';
 
 import Titlebar from '../components/Titlebar';
 import Sidebar from './components/Sidebar';
+import ApiManager from './components/ApiManager';
 
 export default () => {
   const state: Renderer.Reducers.MainSlice = useAppSelector(
@@ -24,6 +25,7 @@ export default () => {
       <Titlebar state={state} dispatch={dispatch} />
       <Application id={state.showSidebar ? 'ShowSidebar' : 'HideSidebar'}>
         <Sidebar state={state} dispatch={dispatch} actions={SidebarActions} />
+        {state.currentContext === Contexts.API_AUTHENTICATION && <ApiManager />}
       </Application>
     </Container>
   ) : (

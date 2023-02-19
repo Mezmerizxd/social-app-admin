@@ -5,7 +5,7 @@ export const InitialState: Renderer.Reducers.MainSlice = {
   projectVersion: '0.0.1',
   isRendererReady: false,
   showSidebar: true,
-  currentContext: 'home',
+  currentContext: 'api_authentication',
 };
 
 export const MainSlice = createSlice({

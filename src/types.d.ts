@@ -31,7 +31,7 @@ declare namespace Renderer.Reducers {
     projectVersion: string;
     isRendererReady: boolean;
     showSidebar: boolean;
-    currentContext: 'home' | 'other';
+    currentContext: string;
   }
 }
 declare namespace Renderer.Stores {}
