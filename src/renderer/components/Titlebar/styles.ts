@@ -39,6 +39,12 @@ export const TitlebarActions = styled.div`
   align-items: center;
   justify-content: space-between;
   -webkit-app-region: no-drag;
+
+  #close {
+    &:hover {
+      background-color: #ff5f56;
+    }
+  }
 `;
 
 export const TitlebarAction = styled.div`

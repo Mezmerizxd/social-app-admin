@@ -3,18 +3,37 @@ import styled from 'styled-components';
 export const SidebarContainer = styled.div`
   background-color: #1d1d1d;
   box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 
   #ShowSidebar {
-    .Sidebar {
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #1d1d1d;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #ff007a;
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ff007a;
     }
 
     .SidebarGroup {
+      padding-bottom: 20px;
       h1 {
         font-size: 14px;
         font-family: 'Quicksand', sans-serif;
         color: white;
         margin-left: 20px;
-        margin-top: 20px;
+        margin-top: 10px;
       }
     }
 
@@ -37,6 +56,7 @@ export const SidebarContainer = styled.div`
         margin-left: 10px;
         font-size: 14px;
         font-family: 'Quicksand', sans-serif;
+        font-weight: 600;
       }
 
       svg {
@@ -46,6 +66,7 @@ export const SidebarContainer = styled.div`
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.8);
       }
 
       &.active {
@@ -54,17 +75,14 @@ export const SidebarContainer = styled.div`
     }
 
     #SidebarActionSelected {
-      color: #ff6b6b;
+      color: #ff007a;
       svg {
-        fill: #ff6b6b;
+        fill: #ff007a;
       }
     }
   }
 
   #HideSidebar {
-    .Sidebar {
-    }
-
     .SidebarGroup {
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
       margin-left: 10px;
@@ -94,9 +112,9 @@ export const SidebarContainer = styled.div`
     }
 
     #SidebarActionSelected {
-      color: #ff6b6b;
+      color: #ff007a;
       svg {
-        fill: #ff6b6b;
+        fill: #ff007a;
       }
     }
   }
@@ -107,13 +125,15 @@ export const SidebarHandle = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: white;
   cursor: pointer;
   transition: 0.2s;
 
   &:hover {
     color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 `;
