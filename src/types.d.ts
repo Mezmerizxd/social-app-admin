@@ -21,6 +21,26 @@ declare namespace Renderer.Components.Sidebar {
     context: any;
   }
 }
+declare namespace Renderer.Components.ApiManager {
+  interface Props extends Renderer.Components.Props {
+    title: string;
+    actions: ApiManagerAction[];
+    options: ApiManagerOption[];
+  }
+
+  interface ApiManagerAction {
+    name: string;
+    icon?: any;
+    func: () => void;
+  }
+
+  interface ApiManagerOption {
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    name: string;
+    url: string;
+    status: 'Success' | 'Error' | 'Unknown';
+  }
+}
 declare namespace Renderer.Hooks {
   type ReduxDispatch = typeof store.dispatch;
   type ReduxSelector = ReturnType<typeof store.getState>;

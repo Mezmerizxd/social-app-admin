@@ -18,13 +18,13 @@ export default ({
         className="Sidebar"
         id={state.showSidebar ? 'ShowSidebar' : 'HideSidebar'}
       >
-        {actions.map((action) => (
-          <div className="SidebarGroup" key={action.groupName}>
+        {actions.map((action, i) => (
+          <div className="SidebarGroup" key={i}>
             {state.showSidebar && <h1>{action.groupName}</h1>}
-            {action.actions.map((option) => (
+            {action.actions.map((option, i) => (
               <div
                 className="SidebarAction"
-                key={option.name}
+                key={i}
                 onClick={() => dispatch(setContext(option.context))}
                 id={
                   state.currentContext === option.context

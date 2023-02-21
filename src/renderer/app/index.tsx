@@ -25,7 +25,27 @@ export default () => {
       <Titlebar state={state} dispatch={dispatch} />
       <Application id={state.showSidebar ? 'ShowSidebar' : 'HideSidebar'}>
         <Sidebar state={state} dispatch={dispatch} actions={SidebarActions} />
-        {state.currentContext === Contexts.API_AUTHENTICATION && <ApiManager />}
+        {state.currentContext === Contexts.API_AUTHENTICATION && (
+          <ApiManager
+            state={state}
+            dispatch={dispatch}
+            title="Authentication"
+            actions={[
+              {
+                name: 'Add',
+                func: () => {},
+              },
+            ]}
+            options={[
+              {
+                method: 'POST',
+                name: 'Login',
+                url: '/api/v1/authentication/login',
+                status: 'Unknown',
+              },
+            ]}
+          />
+        )}
       </Application>
     </Container>
   ) : (
