@@ -35,7 +35,9 @@ export default ({
             <ApiManagerBodyItemType>{option.method}</ApiManagerBodyItemType>
             <ApiManagerBodyItemName>{option.name}</ApiManagerBodyItemName>
             <ApiManagerBodyItemUrl>{option.url}</ApiManagerBodyItemUrl>
-            <ApiManagerBodyItemStatus>{option.status}</ApiManagerBodyItemStatus>
+            <ApiManagerBodyItemStatus id={option.status}>
+              {option.status}
+            </ApiManagerBodyItemStatus>
             <ApiManagerBodyItemActions>
               <ApiManagerAction>
                 <FaPlay />

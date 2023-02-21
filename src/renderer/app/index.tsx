@@ -6,7 +6,7 @@ import { Contexts, SidebarActions } from './config';
 
 import Titlebar from '../components/Titlebar';
 import Sidebar from './components/Sidebar';
-import ApiManager from './components/ApiManager';
+import ApiManager from './components/managers/ApiManager';
 
 export default () => {
   const state: Renderer.Reducers.MainSlice = useAppSelector(
