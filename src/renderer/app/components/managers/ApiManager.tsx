@@ -14,7 +14,12 @@ import {
   ApiManagerBodyItemStatus,
 } from './styles';
 
+import EditApi from '../popups/EditApi';
+import { editApi } from 'renderer/reducers/reducer';
+
 export default ({
+  state,
+  dispatch,
   title,
   actions,
   options,
@@ -42,13 +47,19 @@ export default ({
               <ApiManagerAction>
                 <FaPlay />
               </ApiManagerAction>
-              <ApiManagerAction>
+              <ApiManagerAction
+                onClick={() => {
+                  dispatch(editApi(option));
+                }}
+              >
                 <FaEdit />
               </ApiManagerAction>
             </ApiManagerBodyItemActions>
           </ApiManagerBodyItem>
         ))}
       </ApiManagerBody>
+
+      {state.editApi.isEditing && <EditApi state={state} dispatch={dispatch} />}
     </ApiManagerContainer>
   );
 };

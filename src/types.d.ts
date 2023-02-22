@@ -35,11 +35,15 @@ declare namespace Renderer.Components.ApiManager {
   }
 
   interface ApiManagerOption {
+    id: string;
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     name: string;
     url: string;
     status: 'Success' | 'Error' | 'Unknown';
   }
+}
+declare namespace Renderer.Components.Popups {
+  interface EditApiProps extends Renderer.Components.Props {}
 }
 declare namespace Renderer.Hooks {
   type ReduxDispatch = typeof store.dispatch;
@@ -52,6 +56,16 @@ declare namespace Renderer.Reducers {
     isRendererReady: boolean;
     showSidebar: boolean;
     currentContext: string;
+    editApi: {
+      isEditing: boolean;
+      id: string;
+      name: string;
+      url: string;
+      method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    };
+    apis: {
+      authentication: Renderer.Components.ApiManager.ApiManagerOption[];
+    };
   }
 }
 declare namespace Renderer.Stores {}

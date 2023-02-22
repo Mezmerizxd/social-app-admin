@@ -36,14 +36,7 @@ export default () => {
                 func: () => {},
               },
             ]}
-            options={[
-              {
-                method: 'POST',
-                name: 'Login',
-                url: '/api/v1/authentication/login',
-                status: 'Unknown',
-              },
-            ]}
+            options={state.apis.authentication}
           />
         )}
       </Application>
