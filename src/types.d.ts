@@ -63,9 +63,7 @@ declare namespace Renderer.Reducers {
       url: string;
       method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     };
-    apis: {
-      authentication: Renderer.Components.ApiManager.ApiManagerOption[];
-    };
+    apis: Renderer.Components.ApiManager.ApiManagerOption[];
   }
 }
 declare namespace Renderer.Stores {}

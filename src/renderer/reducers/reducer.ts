@@ -13,17 +13,15 @@ export const InitialState: Renderer.Reducers.MainSlice = {
     url: '',
     method: 'GET',
   },
-  apis: {
-    authentication: [
-      {
-        id: 'authentication',
-        method: 'POST',
-        name: 'Login',
-        url: 'http://mezmerizxd.net/api/v1/authentication/login',
-        status: 'Unknown',
-      },
-    ],
-  },
+  apis: [
+    {
+      id: 'authentication',
+      method: 'POST',
+      name: 'Login',
+      url: 'http://mezmerizxd.net/api/v1/authentication/login',
+      status: 'Unknown',
+    },
+  ],
 };
 
 export const MainSlice = createSlice({
@@ -47,13 +45,56 @@ export const MainSlice = createSlice({
       state.editApi.method = action.payload.method;
     },
     editApiClose: (state) => {
-      state.editApi.isEditing = false;
-      state.editApi.id = '';
+      state.editApi = {
+        isEditing: false,
+        id: '',
+        name: '',
+        url: '',
+        method: 'GET',
+      };
+    },
+    editApiSave: (state, action) => {
+      const apiIndex = state.apis.findIndex(
+        (api) => api.id === state.editApi.id
+      );
+
+      state.apis[apiIndex] = {
+        id: state.editApi.id,
+        name: action.payload.name,
+        url: action.payload.url,
+        method: action.payload.method,
+        status: 'Unknown',
+      };
+
+      state.editApi = {
+        isEditing: false,
+        id: '',
+        name: '',
+        url: '',
+        method: 'GET',
+      };
+    },
+    editApiRemove: (state) => {
+      state.apis = state.apis.filter((api) => api.id !== state.editApi.id);
+      state.editApi = {
+        isEditing: false,
+        id: '',
+        name: '',
+        url: '',
+        method: 'GET',
+      };
     },
   },
 });
 
-export const { renderer, showSidebar, setContext, editApi, editApiClose } =
-  MainSlice.actions;
+export const {
+  renderer,
+  showSidebar,
+  setContext,
+  editApi,
+  editApiClose,
+  editApiSave,
+  editApiRemove,
+} = MainSlice.actions;
 
 export default MainSlice.reducer;

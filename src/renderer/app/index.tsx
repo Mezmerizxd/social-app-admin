@@ -36,7 +36,7 @@ export default () => {
                 func: () => {},
               },
             ]}
-            options={state.apis.authentication}
+            options={state.apis}
           />
         )}
       </Application>

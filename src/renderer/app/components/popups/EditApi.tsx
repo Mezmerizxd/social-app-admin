@@ -12,7 +12,11 @@ import {
   EditApiButton,
   EditApiActions,
 } from './styles';
-import { editApiClose } from '../../../reducers/reducer';
+import {
+  editApiClose,
+  editApiRemove,
+  editApiSave,
+} from '../../../reducers/reducer';
 import { useState } from 'react';
 
 export default ({
@@ -64,10 +68,20 @@ export default ({
               }}
             />
             <EditApiActions>
-              <EditApiButton>
+              <EditApiButton onClick={() => dispatch(editApiRemove())}>
                 <FaTrash />
               </EditApiButton>
-              <EditApiButton>
+              <EditApiButton
+                onClick={() =>
+                  dispatch(
+                    editApiSave({
+                      method: method,
+                      url: url,
+                      name: name,
+                    })
+                  )
+                }
+              >
                 <FaSave />
               </EditApiButton>
             </EditApiActions>
