@@ -6,7 +6,8 @@ import { Contexts, SidebarActions } from './config';
 
 import Titlebar from '../components/Titlebar';
 import Sidebar from './components/Sidebar';
-import ApiManager from './components/managers/ApiManager';
+import ApiManager from './components/managers/Api';
+import ApiEditor from './components/editors/Api';
 
 export default () => {
   const state: Renderer.Reducers.MainSlice = useAppSelector(
@@ -38,6 +39,10 @@ export default () => {
             ]}
             options={state.apis}
           />
+        )}
+
+        {state.isApiEditorOpen && (
+          <ApiEditor state={state} dispatch={dispatch} />
         )}
       </Application>
     </Container>

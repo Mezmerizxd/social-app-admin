@@ -1,4 +1,5 @@
 import { FaEdit, FaPlay } from 'react-icons/fa';
+import { toggleApiEditor } from 'renderer/reducers/reducer';
 import {
   ApiManagerContainer,
   ApiManagerHeader,
@@ -14,11 +15,7 @@ import {
   ApiManagerBodyItemStatus,
 } from './styles';
 
-import EditApi from '../popups/EditApi';
-import { editApi } from 'renderer/reducers/reducer';
-
 export default ({
-  state,
   dispatch,
   title,
   actions,
@@ -49,7 +46,7 @@ export default ({
               </ApiManagerAction>
               <ApiManagerAction
                 onClick={() => {
-                  dispatch(editApi(option));
+                  dispatch(toggleApiEditor(option));
                 }}
               >
                 <FaEdit />
@@ -58,8 +55,6 @@ export default ({
           </ApiManagerBodyItem>
         ))}
       </ApiManagerBody>
-
-      {state.editApi.isEditing && <EditApi state={state} dispatch={dispatch} />}
     </ApiManagerContainer>
   );
 };

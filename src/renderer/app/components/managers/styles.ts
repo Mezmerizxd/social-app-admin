@@ -4,6 +4,10 @@ import styled from 'styled-components';
 export const ApiManagerContainer = styled.div`
   margin: 5px;
   transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 `;
 
 export const ApiManagerHeader = styled.div`
@@ -67,6 +71,7 @@ export const ApiManagerAction = styled.div`
   }
 `;
 export const ApiManagerBody = styled.div`
+  height: calc(100% - 50px)
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,6 +79,23 @@ export const ApiManagerBody = styled.div`
   width: 95%;
   margin: 0 auto;
   transition: 0.2s;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #1d1d1d;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #ff007a;
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ff007a;
+  }
 `;
 export const ApiManagerBodyItem = styled.div`
   display: flex;

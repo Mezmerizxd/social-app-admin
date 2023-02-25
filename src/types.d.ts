@@ -35,7 +35,7 @@ declare namespace Renderer.Components.ApiManager {
   }
 
   interface ApiManagerOption {
-    id: string;
+    id: number;
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     name: string;
     url: string;
@@ -56,14 +56,20 @@ declare namespace Renderer.Reducers {
     isRendererReady: boolean;
     showSidebar: boolean;
     currentContext: string;
-    editApi: {
-      isEditing: boolean;
-      id: string;
-      name: string;
-      url: string;
-      method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    };
-    apis: Renderer.Components.ApiManager.ApiManagerOption[];
+    isApiEditorOpen: boolean;
+    apiEditorData: Api | null;
+    isCreatingApi: boolean;
+    apis: Api[];
+  }
+
+  interface Api {
+    id: number;
+    method: string;
+    name: string;
+    url: string;
+    contentType: string;
+    connection: string;
+    status: string;
   }
 }
 declare namespace Renderer.Stores {}
