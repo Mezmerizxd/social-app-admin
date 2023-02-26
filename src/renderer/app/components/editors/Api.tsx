@@ -72,7 +72,7 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
           contentType: contentType,
           connection: connection,
           body: body,
-          status: 'Unknown',
+          status: 0,
         })
       );
     } else {

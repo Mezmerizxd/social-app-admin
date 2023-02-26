@@ -15,6 +15,9 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+// Managers
+import ApiManager from './managers/api-manager';
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -29,6 +32,9 @@ if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
+
+// Managers
+ApiManager;
 
 ipcMain.on('api', (_event, arg) => {
   switch (arg.event) {

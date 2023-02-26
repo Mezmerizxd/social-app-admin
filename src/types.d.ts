@@ -70,7 +70,10 @@ declare namespace Renderer.Reducers {
     contentType: string;
     connection: string;
     body: string;
-    status: string;
+    status: number;
+    response?: {
+      data: any;
+    };
   }
 }
 declare namespace Renderer.Stores {}

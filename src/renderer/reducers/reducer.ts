@@ -14,14 +14,14 @@ export const InitialState: Renderer.Reducers.MainSlice = {
       id: 0,
       method: 'POST',
       name: 'Login',
-      url: 'http://mezmerizxd.net/api/v1/authentication/login',
+      url: 'http://mezmerizxd.net/api/v1/account/login',
       contentType: 'application/json',
       connection: 'Keep-Alive',
       body: JSON.stringify({
         email: 'test@test.com',
         password: 'testtest',
       }),
-      status: 'Unknown',
+      status: 0,
     },
   ],
 };

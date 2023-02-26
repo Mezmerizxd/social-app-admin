@@ -107,16 +107,7 @@ export const ApiManagerBodyItem = styled.div`
   padding: 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   transition: 0.2s;
-
-  #Unknown {
-    color: #bfbfbf;
-  }
-  #Success {
-    color: #00ff00;
-  }
-  #Error {
-    color: #ff0000;
-  }
+  color: #ff007a;
 `;
 export const ApiManagerBodyItemType = styled.div`
   display: flex;
