@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import { addApi, toggleApiEditor, editApi } from 'renderer/reducers/reducer';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'prismjs/themes/prism.css';
+import CodeEditor from '../../../components/CodeEditor';
 import {
   Editor,
   EditorBody,
@@ -10,6 +16,7 @@ import {
   EditorFooterError,
   EditorHeader,
   EditorHeaderTitle,
+  EditorLabelledInput,
   EditorSelectInput,
   EditorTextInput,
 } from './styles';
@@ -36,6 +43,7 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
   const [connection, setConnection] = useState(
     state.apiEditorData?.connection || connections[0]
   );
+  const [body, setBody] = useState(state.apiEditorData?.body || '');
   const [error, setError] = useState<string | null>(null);
 
   function save() {
@@ -55,7 +63,6 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
     }
     // Add data to store
     if (state.isCreatingApi === true) {
-      console.log('Creating API');
       dispatch(
         addApi({
           id: state.apis.length > 0 ? state.apis.length + 1 : 0,
@@ -64,14 +71,12 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
           url: url,
           contentType: contentType,
           connection: connection,
+          body: body,
           status: 'Unknown',
         })
       );
     } else {
       if (state.apiEditorData) {
-        console.log('Editing API');
-        console.log(name);
-
         const apis: any = [];
         state.apis.forEach((api) => {
           if (api.id === state.apiEditorData?.id) {
@@ -82,6 +87,7 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
               url: url,
               contentType: contentType,
               connection: connection,
+              body: body,
               status: api.status,
             });
           } else {
@@ -91,6 +97,7 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
         dispatch(editApi(apis));
       }
     }
+    dispatch(toggleApiEditor({ type: 'close' }));
     return;
   }
 
@@ -143,10 +150,27 @@ export default ({ state, dispatch }: Renderer.Components.Props) => {
               </option>
             ))}
           </EditorSelectInput>
+          <EditorLabelledInput>
+            <label htmlFor="codeEditor">Request Body</label>
+            <CodeEditor
+              value={body}
+              id="codeEditor"
+              className="code-editor"
+              onValueChange={(body) => setBody(body)}
+              highlight={(body) => highlight(body, languages.js)}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 12,
+              }}
+            />
+          </EditorLabelledInput>
         </EditorBody>
         <EditorFooter>
           {error !== null && <EditorFooterError>{error}</EditorFooterError>}
-          <EditorFooterButton onClick={() => dispatch(toggleApiEditor(null))}>
+          <EditorFooterButton
+            onClick={() => dispatch(toggleApiEditor({ type: 'close' }))}
+          >
             Cancel
           </EditorFooterButton>
           <EditorFooterButton onClick={save}>Save</EditorFooterButton>

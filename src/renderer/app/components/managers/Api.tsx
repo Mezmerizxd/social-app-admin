@@ -27,7 +27,9 @@ export default ({
         <ApiManagerHeaderTitle>{title}</ApiManagerHeaderTitle>
         <ApiManagerHeaderActions>
           {actions.map((action, i) => (
-            <ApiManagerAction key={i}>{action.name}</ApiManagerAction>
+            <ApiManagerAction key={i} onClick={action.func}>
+              {action.name}
+            </ApiManagerAction>
           ))}
         </ApiManagerHeaderActions>
       </ApiManagerHeader>
@@ -46,7 +48,7 @@ export default ({
               </ApiManagerAction>
               <ApiManagerAction
                 onClick={() => {
-                  dispatch(toggleApiEditor(option));
+                  dispatch(toggleApiEditor({ type: 'edit', data: option }));
                 }}
               >
                 <FaEdit />

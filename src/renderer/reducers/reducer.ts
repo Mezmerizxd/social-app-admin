@@ -17,6 +17,10 @@ export const InitialState: Renderer.Reducers.MainSlice = {
       url: 'http://mezmerizxd.net/api/v1/authentication/login',
       contentType: 'application/json',
       connection: 'Keep-Alive',
+      body: JSON.stringify({
+        email: 'test@test.com',
+        password: 'testtest',
+      }),
       status: 'Unknown',
     },
   ],
@@ -36,13 +40,22 @@ export const MainSlice = createSlice({
       state.currentContext = action.payload;
     },
     toggleApiEditor: (state, action) => {
-      if (action.payload) {
-        state.apiEditorData = action.payload;
-      } else {
-        state.apiEditorData = null;
-        state.isCreatingApi = true;
+      switch (action.payload.type) {
+        case 'close':
+          state.apiEditorData = null;
+          state.isApiEditorOpen = false;
+          state.isCreatingApi = false;
+          break;
+        case 'edit':
+          state.apiEditorData = action.payload.data;
+          state.isApiEditorOpen = true;
+          break;
+        case 'create':
+          state.apiEditorData = null;
+          state.isCreatingApi = true;
+          state.isApiEditorOpen = true;
+          break;
       }
-      state.isApiEditorOpen = !state.isApiEditorOpen;
     },
     addApi: (state, action) => {
       state.apis.length > 0
@@ -50,8 +63,6 @@ export const MainSlice = createSlice({
         : (state.apis = action.payload);
     },
     editApi: (state, action) => {
-      console.log(action.payload);
-
       state.apis = action.payload;
     },
   },

@@ -50,6 +50,21 @@ export const EditorBody = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 
+  .code-editor {
+    margin-top: 5px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 5px;
+    background-color: rgba(175, 0, 83, 0.02);
+    border: 1px solid rgba(175, 0, 83, 0.3);
+    outline: none;
+    &:active,
+    &:focus {
+      background-color: rgba(175, 0, 83, 0.1);
+      border: 1px solid rgba(175, 0, 83, 0.3);
+      outline: none;
+    }
+  }
+
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -170,5 +185,17 @@ export const EditorSelectInput = styled.select`
     width: 100%;
     color: rgb(255, 0, 122);
     background-color: rgb(35, 35, 35);
+  }
+`;
+export const EditorLabelledInput = styled.div`
+  margin-top: 5px;
+
+  label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding-left: 5px;
   }
 `;

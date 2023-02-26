@@ -25,7 +25,7 @@ declare namespace Renderer.Components.ApiManager {
   interface Props extends Renderer.Components.Props {
     title: string;
     actions: ApiManagerAction[];
-    options: ApiManagerOption[];
+    options: Renderer.Reducers.Api[];
   }
 
   interface ApiManagerAction {
@@ -69,6 +69,7 @@ declare namespace Renderer.Reducers {
     url: string;
     contentType: string;
     connection: string;
+    body: string;
     status: string;
   }
 }

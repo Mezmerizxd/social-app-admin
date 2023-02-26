@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { Container, Waiting, Application } from './styles';
-import { renderer } from '../reducers/reducer';
+import { renderer, toggleApiEditor } from '../reducers/reducer';
 import { Contexts, SidebarActions } from './config';
 
 import Titlebar from '../components/Titlebar';
@@ -34,7 +34,9 @@ export default () => {
             actions={[
               {
                 name: 'Add',
-                func: () => {},
+                func: () => {
+                  dispatch(toggleApiEditor({ type: 'create' }));
+                },
               },
             ]}
             options={state.apis}
