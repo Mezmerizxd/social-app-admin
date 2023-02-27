@@ -72,7 +72,7 @@ export default ({
             <ApiManagerBodyItemName>{option.name}</ApiManagerBodyItemName>
             <ApiManagerBodyItemUrl>{option.url}</ApiManagerBodyItemUrl>
             <ApiManagerBodyItemStatus id={option.status.toString()}>
-              {option.status}
+              {option.status === 0 ? 'Not tested' : option.status}
             </ApiManagerBodyItemStatus>
             <ApiManagerBodyItemActions>
               <ApiManagerAction

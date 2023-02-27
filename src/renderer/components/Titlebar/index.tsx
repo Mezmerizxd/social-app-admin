@@ -15,15 +15,16 @@ export default ({ state }: Renderer.Components.Props) => {
   const [isMaximized, setIsMaximized] = useState(false);
 
   function close() {
-    window.electron.Api.send('api', { event: 'window:close', data: null });
+    window.electron.AppManager.saveState(state);
+    window.electron.AppManager.window.close();
   }
 
   function minimize() {
-    window.electron.Api.send('api', { event: 'window:minimize', data: null });
+    window.electron.AppManager.window.minimize();
   }
 
   function maximize() {
-    window.electron.Api.send('api', { event: 'window:maximize', data: null });
+    window.electron.AppManager.window.maximize();
     setIsMaximized(!isMaximized);
   }
 

@@ -17,6 +17,7 @@ import { resolveHtmlPath } from './util';
 
 // Managers
 import ApiManager from './managers/api-manager';
+import AppManager from './managers/app-manager';
 
 export default class AppUpdater {
   constructor() {
@@ -32,9 +33,6 @@ if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
-
-// Managers
-ApiManager;
 
 ipcMain.on('api', (_event, arg) => {
   switch (arg.event) {
@@ -134,6 +132,10 @@ const createWindow = async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+
+  // Managers
+  ApiManager;
+  new AppManager(app, mainWindow);
 };
 
 /**

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import { Container, Waiting, Application } from './styles';
-import { renderer, toggleApiEditor } from '../reducers/reducer';
+import { renderer, setState, toggleApiEditor } from '../reducers/reducer';
 import { Contexts, SidebarActions } from './config';
 
 import Titlebar from '../components/Titlebar';
@@ -17,7 +17,12 @@ export default () => {
 
   useEffect(() => {
     setTimeout(async () => {
-      dispatch(renderer(true));
+      window.electron.AppManager.getState();
+      window.electron.Api.receive('app-manager-state-response', (data: any) => {
+        const r = JSON.parse(data);
+        if (r.data) dispatch(setState(r.state));
+        dispatch(renderer(true));
+      });
     }, 2000);
   }, []);
 

@@ -9,27 +9,18 @@ export const InitialState: Renderer.Reducers.MainSlice = {
   isApiEditorOpen: false,
   apiEditorData: null,
   isCreatingApi: false,
-  apis: [
-    {
-      id: 0,
-      method: 'POST',
-      name: 'Login',
-      url: 'http://mezmerizxd.net/api/v1/account/login',
-      contentType: 'application/json',
-      connection: 'Keep-Alive',
-      body: JSON.stringify({
-        email: 'test@test.com',
-        password: 'testtest',
-      }),
-      status: 0,
-    },
-  ],
+  apis: [],
 };
 
 export const MainSlice = createSlice({
   name: 'main',
   initialState: InitialState,
   reducers: {
+    setState: (state, action) => {
+      if (action.payload !== null || action.payload !== undefined) {
+        return action.payload;
+      }
+    },
     renderer: (state, action) => {
       state.isRendererReady = action.payload;
     },
@@ -69,6 +60,7 @@ export const MainSlice = createSlice({
 });
 
 export const {
+  setState,
   renderer,
   showSidebar,
   setContext,
