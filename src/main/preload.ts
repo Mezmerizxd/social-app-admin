@@ -1,7 +1,7 @@
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer } from "electron";
 
-contextBridge.exposeInMainWorld('electron', {
-  Api: {
+contextBridge.exposeInMainWorld("api", {
+  basic: {
     send(channel: any, data: { event: string; data?: any }) {
       ipcRenderer.send(channel, data);
     },
@@ -9,42 +9,35 @@ contextBridge.exposeInMainWorld('electron', {
       ipcRenderer.on(channel, (_event: any, ...args) => func(...args));
     },
   },
-  AppManager: {
-    window: {
-      close() {
-        ipcRenderer.send('app-manager', {
-          event: 'window:close',
-        });
-      },
-      minimize() {
-        ipcRenderer.send('app-manager', {
-          event: 'window:minimize',
-        });
-      },
-      maximize() {
-        ipcRenderer.send('app-manager', {
-          event: 'window:maximize',
-        });
-      },
+  windowManager: {
+    minimize() {
+      ipcRenderer.send("window-manager", { event: "minimize" });
     },
-    getState() {
-      ipcRenderer.send('app-manager', {
-        event: 'get-state',
-      });
+    maximize() {
+      ipcRenderer.send("window-manager", { event: "maximize" });
     },
-    saveState(state: any) {
-      ipcRenderer.send('app-manager', {
-        event: 'save-state',
-        data: state,
-      });
+    close() {
+      ipcRenderer.send("window-manager", { event: "close" });
     },
   },
-  ApiManager: {
-    testApiRequest(data: Renderer.Reducers.Api) {
-      ipcRenderer.send('api-manager', {
-        event: 'test-api-request',
-        data,
-      });
+  appManager: {
+    getState() {
+      ipcRenderer.send("app-manager", { event: "get-state" });
+    },
+    setState(data: any) {
+      ipcRenderer.send("app-manager", { event: "set-state", data });
+    },
+    createApi(data: Renderer.Api) {
+      ipcRenderer.send("app-manager", { event: "create-api", data });
+    },
+    editApi(data: Renderer.Api) {
+      ipcRenderer.send("app-manager", { event: "edit-api", data });
+    },
+    deleteApi(data: Renderer.Api) {
+      ipcRenderer.send("app-manager", { event: "delete-api", data });
+    },
+    testApi(data: Renderer.Api) {
+      ipcRenderer.send("app-manager", { event: "test-api", data });
     },
   },
 });

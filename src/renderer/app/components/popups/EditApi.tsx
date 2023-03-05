@@ -1,4 +1,4 @@
-import { FaTimes, FaSave, FaTrash } from 'react-icons/fa';
+import { FaTimes, FaSave, FaTrash } from "react-icons/fa";
 import {
   PopupContainer,
   Popup,
@@ -11,24 +11,21 @@ import {
   EditApiSelect,
   EditApiButton,
   EditApiActions,
-} from './styles';
-import {
-  editApiClose,
-  editApiRemove,
-  editApiSave,
-} from '../../../reducers/reducer';
-import { useState } from 'react';
+} from "./styles";
+// import {
+//   editApiClose,
+//   editApiRemove,
+//   editApiSave,
+// } from "../../../reducers/reducer";
+import { useState } from "react";
 
-export default ({
-  state,
-  dispatch,
-}: Renderer.Components.Popups.EditApiProps) => {
+export default ({ state, dispatch }: Renderer.Component.Popup.EditApiProps) => {
   const [method, setMethod] = useState<any>(state.editApi.method);
   const [url, setUrl] = useState(state.editApi.url);
   const [name, setName] = useState(state.editApi.name);
 
   function closePopup() {
-    dispatch(editApiClose());
+    // dispatch(editApiClose());
   }
 
   return (
@@ -68,20 +65,10 @@ export default ({
               }}
             />
             <EditApiActions>
-              <EditApiButton onClick={() => dispatch(editApiRemove())}>
+              <EditApiButton>
                 <FaTrash />
               </EditApiButton>
-              <EditApiButton
-                onClick={() =>
-                  dispatch(
-                    editApiSave({
-                      method: method,
-                      url: url,
-                      name: name,
-                    })
-                  )
-                }
-              >
+              <EditApiButton>
                 <FaSave />
               </EditApiButton>
             </EditApiActions>

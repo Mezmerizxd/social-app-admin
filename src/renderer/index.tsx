@@ -1,17 +1,14 @@
-import { createRoot } from 'react-dom/client';
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { store } from './stores/store';
-import App from './app';
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./stores/store";
+import App from "./app";
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
 root.render(
-  <Router>
-    <Provider store={store}>
-      <Routes>
-        <Route path="/" element={<App />} />
-      </Routes>
-    </Provider>
-  </Router>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

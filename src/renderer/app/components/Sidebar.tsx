@@ -1,22 +1,22 @@
-import { BsArrowLeftRight } from 'react-icons/bs';
-import { SidebarContainer, SidebarHandle } from './styles';
-import { setContext, showSidebar } from '../../reducers/reducer';
+import { BsArrowLeftRight } from "react-icons/bs";
+import { SidebarContainer, SidebarHandle } from "./styles";
+import { setContext, showSidebar } from "../../reducers/reducer";
 
 export default ({
   state,
   dispatch,
   actions,
-}: Renderer.Components.Sidebar.Props) => {
+}: Renderer.Component.Sidebar.Props) => {
   return (
     <SidebarContainer
-      style={state.showSidebar ? { width: '230px' } : { width: '50px' }}
+      style={state.showSidebar ? { width: "230px" } : { width: "50px" }}
     >
       <SidebarHandle onClick={() => dispatch(showSidebar(!state.showSidebar))}>
         <BsArrowLeftRight />
       </SidebarHandle>
       <div
         className="Sidebar"
-        id={state.showSidebar ? 'ShowSidebar' : 'HideSidebar'}
+        id={state.showSidebar ? "ShowSidebar" : "HideSidebar"}
       >
         {actions.map((action, i) => (
           <div className="SidebarGroup" key={i}>
@@ -28,8 +28,8 @@ export default ({
                 onClick={() => dispatch(setContext(option.context))}
                 id={
                   state.currentContext === option.context
-                    ? 'SidebarActionSelected'
-                    : ''
+                    ? "SidebarActionSelected"
+                    : ""
                 }
               >
                 {option.icon}

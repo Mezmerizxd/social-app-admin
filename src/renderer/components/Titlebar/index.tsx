@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import { MdClose } from 'react-icons/md';
-import { AiOutlineMinus } from 'react-icons/ai';
-import { VscChromeMaximize, VscChromeRestore } from 'react-icons/vsc';
+import { useState } from "react";
+import { MdClose } from "react-icons/md";
+import { AiOutlineMinus } from "react-icons/ai";
+import { VscChromeMaximize, VscChromeRestore } from "react-icons/vsc";
 import {
   Container,
   Titlebar,
   TitlebarTitle,
   TitlebarActions,
   TitlebarAction,
-} from './styles';
-import icon from '../../../../assets/icon.svg';
+} from "./styles";
+import icon from "../../../../assets/icon.svg";
 
-export default ({ state }: Renderer.Components.Props) => {
+export default ({ state }: Renderer.Component.Props) => {
   const [isMaximized, setIsMaximized] = useState(false);
 
   function close() {
-    window.electron.AppManager.saveState(state);
-    window.electron.AppManager.window.close();
+    window.api.appManager.setState(state);
+    window.api.windowManager.close();
   }
 
   function minimize() {
-    window.electron.AppManager.window.minimize();
+    window.api.windowManager.minimize();
   }
 
   function maximize() {
-    window.electron.AppManager.window.maximize();
+    window.api.windowManager.maximize();
     setIsMaximized(!isMaximized);
   }
 

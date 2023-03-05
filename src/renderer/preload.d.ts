@@ -1,21 +1,22 @@
 declare global {
   interface Window {
-    electron: {
-      Api: {
+    api: {
+      basic: {
         send(channel: any, data: { event: string; data?: any }): void;
         receive(channel: any, func: (...args: unknown[]) => void): void;
       };
-      AppManager: {
-        window: {
-          close(): void;
-          minimize(): void;
-          maximize(): void;
-        };
-        getState(): void;
-        saveState(state: any): void;
+      windowManager: {
+        minimize(): void;
+        maximize(): void;
+        close(): void;
       };
-      ApiManager: {
-        testApiRequest(data: Renderer.Reducers.Api): void;
+      appManager: {
+        getState(): void;
+        setState(data: any): void;
+        createApi(data: Renderer.Api): void;
+        editApi(data: Renderer.Api): void;
+        deleteApi(data: Renderer.Api): void;
+        testApi(data: Renderer.Api): void;
       };
     };
   }

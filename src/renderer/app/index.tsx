@@ -1,35 +1,38 @@
-import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import { Container, Waiting, Application } from './styles';
-import { renderer, setState, toggleApiEditor } from '../reducers/reducer';
-import { Contexts, SidebarActions } from './config';
+import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
+import { Container, Waiting, Application } from "./styles";
+import { renderer, setState, toggleApiEditor } from "../reducers/reducer";
+import { Contexts, SidebarActions } from "./config";
 
-import Titlebar from '../components/Titlebar';
-import Sidebar from './components/Sidebar';
-import ApiManager from './components/managers/Api';
-import ApiEditor from './components/editors/Api';
+import Titlebar from "../components/Titlebar";
+import Sidebar from "./components/Sidebar";
+import ApiManager from "./components/managers/Api";
+import ApiEditor from "./components/editors/Api";
 
 export default () => {
-  const state: Renderer.Reducers.MainSlice = useAppSelector(
+  const state: Renderer.Reducer.MainState = useAppSelector(
     (state) => state.main
   );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeout(async () => {
-      window.electron.AppManager.getState();
-      window.electron.Api.receive('app-manager-state-response', (data: any) => {
-        const r = JSON.parse(data);
-        if (r.data) dispatch(setState(r.state));
+      window.api.appManager.getState();
+    });
+
+    window.api.basic.receive(
+      "app-mgr-receive-state",
+      (data: Renderer.Reducer.MainState) => {
+        dispatch(setState(data));
         dispatch(renderer(true));
-      });
-    }, 2000);
+      }
+    );
   }, []);
 
   return state.isRendererReady ? (
     <Container>
       <Titlebar state={state} dispatch={dispatch} />
-      <Application id={state.showSidebar ? 'ShowSidebar' : 'HideSidebar'}>
+      <Application id={state.showSidebar ? "ShowSidebar" : "HideSidebar"}>
         <Sidebar state={state} dispatch={dispatch} actions={SidebarActions} />
         {state.currentContext === Contexts.API_AUTHENTICATION && (
           <ApiManager
@@ -38,9 +41,9 @@ export default () => {
             title="Authentication"
             actions={[
               {
-                name: 'Add',
+                name: "Add",
                 func: () => {
-                  dispatch(toggleApiEditor({ type: 'create' }));
+                  dispatch(toggleApiEditor({ type: "create" }));
                 },
               },
             ]}

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { FaEdit, FaPlay } from 'react-icons/fa';
-import { editApi, toggleApiEditor } from 'renderer/reducers/reducer';
+import { useEffect } from "react";
+import { FaEdit, FaPlay } from "react-icons/fa";
+import { setApis, toggleApiEditor } from "../../../reducers/reducer";
 import {
   ApiManagerContainer,
   ApiManagerHeader,
@@ -14,7 +14,7 @@ import {
   ApiManagerBodyItemActions,
   ApiManagerBodyItemName,
   ApiManagerBodyItemStatus,
-} from './styles';
+} from "./styles";
 
 export default ({
   state,
@@ -22,37 +22,17 @@ export default ({
   title,
   actions,
   options,
-}: Renderer.Components.ApiManager.Props) => {
+}: Renderer.Component.ApiManager.Props) => {
   useEffect(() => {
-    window.electron.Api.receive('api-manager-response', (data: any) => {
-      if (data !== null) {
-        const r = JSON.parse(data);
-        console.log('updating api status');
+    window.api.basic.receive("app-mgr-receive-api", (data: any) => {
+      dispatch(setApis(data));
+    });
 
-        const apis: any = [];
-        state.apis.forEach((api) => {
-          if (api.id === r.api.id) {
-            apis.push({
-              id: r.api.id,
-              method: r.api.method,
-              name: r.api.name,
-              url: r.api.url,
-              contentType: r.api.contentType,
-              connection: r.api.connection,
-              body: r.api.body,
-              status: r.status,
-              response: {
-                data: r.data,
-              },
-            });
-          } else {
-            apis.push(api);
-          }
-        });
-        dispatch(editApi(apis));
-      }
+    window.api.basic.receive("app-mgr-receive-api-test", (data: any) => {
+      console.log(data);
     });
   }, []);
+
   return (
     <ApiManagerContainer id={title}>
       <ApiManagerHeader>
@@ -66,32 +46,35 @@ export default ({
         </ApiManagerHeaderActions>
       </ApiManagerHeader>
       <ApiManagerBody>
-        {options.map((option, i) => (
-          <ApiManagerBodyItem key={i}>
-            <ApiManagerBodyItemType>{option.method}</ApiManagerBodyItemType>
-            <ApiManagerBodyItemName>{option.name}</ApiManagerBodyItemName>
-            <ApiManagerBodyItemUrl>{option.url}</ApiManagerBodyItemUrl>
-            <ApiManagerBodyItemStatus id={option.status.toString()}>
-              {option.status === 0 ? 'Not tested' : option.status}
-            </ApiManagerBodyItemStatus>
-            <ApiManagerBodyItemActions>
-              <ApiManagerAction
-                onClick={() =>
-                  window.electron.ApiManager.testApiRequest(option)
-                }
-              >
-                <FaPlay />
-              </ApiManagerAction>
-              <ApiManagerAction
-                onClick={() => {
-                  dispatch(toggleApiEditor({ type: 'edit', data: option }));
-                }}
-              >
-                <FaEdit />
-              </ApiManagerAction>
-            </ApiManagerBodyItemActions>
-          </ApiManagerBodyItem>
-        ))}
+        {options &&
+          options.map((option, i) => (
+            <ApiManagerBodyItem key={i}>
+              <ApiManagerBodyItemType>{option.method}</ApiManagerBodyItemType>
+              <ApiManagerBodyItemName>{option.name}</ApiManagerBodyItemName>
+              <ApiManagerBodyItemUrl>{option.url}</ApiManagerBodyItemUrl>
+              <ApiManagerBodyItemStatus id={option.status.toString()}>
+                {option.status === 0
+                  ? "Not tested"
+                  : option.status === -1
+                  ? "Error"
+                  : option.status}
+              </ApiManagerBodyItemStatus>
+              <ApiManagerBodyItemActions>
+                <ApiManagerAction
+                  onClick={() => window.api.appManager.testApi(option)}
+                >
+                  <FaPlay />
+                </ApiManagerAction>
+                <ApiManagerAction
+                  onClick={() => {
+                    dispatch(toggleApiEditor({ type: "edit", data: option }));
+                  }}
+                >
+                  <FaEdit />
+                </ApiManagerAction>
+              </ApiManagerBodyItemActions>
+            </ApiManagerBodyItem>
+          ))}
       </ApiManagerBody>
     </ApiManagerContainer>
   );

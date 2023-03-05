@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-export const InitialState: Renderer.Reducers.MainSlice = {
-  projectName: 'Social App Admin',
-  projectVersion: '0.0.1',
+export const InitialState: Renderer.Reducer.MainState = {
+  projectName: "",
+  projectVersion: "",
   isRendererReady: false,
-  showSidebar: true,
-  currentContext: 'api_authentication',
+  showSidebar: false,
+  currentContext: "",
   isApiEditorOpen: false,
   apiEditorData: null,
   isCreatingApi: false,
@@ -13,7 +13,7 @@ export const InitialState: Renderer.Reducers.MainSlice = {
 };
 
 export const MainSlice = createSlice({
-  name: 'main',
+  name: "main",
   initialState: InitialState,
   reducers: {
     setState: (state, action) => {
@@ -32,28 +32,23 @@ export const MainSlice = createSlice({
     },
     toggleApiEditor: (state, action) => {
       switch (action.payload.type) {
-        case 'close':
+        case "close":
           state.apiEditorData = null;
           state.isApiEditorOpen = false;
           state.isCreatingApi = false;
           break;
-        case 'edit':
+        case "edit":
           state.apiEditorData = action.payload.data;
           state.isApiEditorOpen = true;
           break;
-        case 'create':
+        case "create":
           state.apiEditorData = null;
           state.isCreatingApi = true;
           state.isApiEditorOpen = true;
           break;
       }
     },
-    addApi: (state, action) => {
-      state.apis.length > 0
-        ? state.apis.push(action.payload)
-        : (state.apis = action.payload);
-    },
-    editApi: (state, action) => {
+    setApis: (state, action) => {
       state.apis = action.payload;
     },
   },
@@ -65,8 +60,7 @@ export const {
   showSidebar,
   setContext,
   toggleApiEditor,
-  addApi,
-  editApi,
+  setApis,
 } = MainSlice.actions;
 
 export default MainSlice.reducer;

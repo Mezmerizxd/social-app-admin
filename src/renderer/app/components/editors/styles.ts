@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const EditorContainer = styled.div`
   width: 100vw;
@@ -39,7 +39,7 @@ export const EditorHeaderTitle = styled.div`
   font-size: 20px;
   color: rgb(255, 255, 255);
   margin-left: 10px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: 600;
 `;
 export const EditorBody = styled.div`
@@ -51,6 +51,8 @@ export const EditorBody = styled.div`
   overflow-x: hidden;
 
   .code-editor {
+    width: 100%;
+
     margin-top: 5px;
     color: rgb(255, 255, 255);
     margin-bottom: 5px;
@@ -98,7 +100,7 @@ export const EditorFooterButton = styled.button`
   padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -128,7 +130,7 @@ export const EditorFooterError = styled.p`
   color: #df4b4b;
   background-color: rgba(176, 45, 45, 0.15);
   border-radius: 3px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: 600;
 `;
 export const EditorDualInput = styled.div`
@@ -149,7 +151,7 @@ export const EditorTextInput = styled.input`
   margin-top: 5px;
   margin-bottom: 5px;
   color: rgb(255, 255, 255);
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -174,7 +176,7 @@ export const EditorSelectInput = styled.select`
   margin-top: 5px;
   margin-bottom: 5px;
   color: rgb(255, 0, 122);
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -193,9 +195,28 @@ export const EditorLabelledInput = styled.div`
   label {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.8);
-    font-family: 'Quicksand', sans-serif;
+    font-family: "Quicksand", sans-serif;
     font-weight: 500;
     letter-spacing: 0.5px;
     padding-left: 5px;
   }
+`;
+export const EditorJsonBodyEditor = styled.textarea`
+  width: calc(100% - 20px);
+  height: 80px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: rgb(255, 255, 255);
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: 0.2s;
+  outline: none;
+  border: 1px solid rgba(175, 0, 83, 0.3);
+  background-color: rgba(175, 0, 83, 0.04);
 `;
